@@ -58,7 +58,7 @@ function findVs2017() {
         log.silly('find-msbuild', 'path', vsSetup.path);
         log.silly('find-msbuild', 'sdk', vsSetup.sdk);
         var build = {
-            path: path.join(vsSetup.path, 'MSBuild', '15.0', 'Bin', 'MSBuild.exe'),
+            path: path.join(vsSetup.path, 'MSBuild', 'Current', 'Bin', 'MSBuild.exe'),
             version: 15
         };
         log.silly('find-msbuild', 'using following msbuild:');

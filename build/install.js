@@ -45,6 +45,7 @@ var getLibsFactory_1 = require("./getLibsFactory");
 var setupOpencv_1 = require("./setupOpencv");
 var utils_1 = require("./utils");
 var log = require('npmlog');
+log.level = 'silly';
 var getLibs = getLibsFactory_1.getLibsFactory({ isWin: utils_1.isWin, isOSX: utils_1.isOSX, opencvModules: constants_1.opencvModules, path: path, fs: fs });
 function checkInstalledLibs(autoBuildFile) {
     var hasLibs = true;
