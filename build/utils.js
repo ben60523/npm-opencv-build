@@ -66,7 +66,7 @@ function execFile(cmd, args, options) {
 }
 exports.execFile = execFile;
 function spawn(cmd, args, options) {
-    log.silly('install', 'spawning:', cmd, args);
+    log.info('install', 'spawning:', cmd, args);
     return new Promise(function (resolve, reject) {
         try {
             var child = child_process.spawn(cmd, args, Object.assign({}, { stdio: 'inherit' }, options));
@@ -76,12 +76,14 @@ function spawn(cmd, args, options) {
                 }
                 var msg = 'child process exited with code ' + code + ' (for more info, set \'--loglevel silly\')';
                 if (code !== 0) {
+                    log.error('install', msg)
                     return reject(msg);
                 }
                 return resolve(msg);
             });
         }
         catch (err) {
+            log.error('install', err)
             return reject(err);
         }
     });
