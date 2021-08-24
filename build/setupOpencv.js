@@ -56,6 +56,7 @@ function getRmDirCmd(dirname) {
     return utils_1.isWin() ? getIfExistsDirCmd(dirname) + " rd /s /q " + dirname : "rm -rf " + dirname;
 }
 function getMsbuildCmd(sln) {
+    console.log(sln)
     return [
         sln,
         '/p:Configuration=Release',
@@ -65,6 +66,7 @@ function getMsbuildCmd(sln) {
 function getRunBuildCmd(msbuildExe) {
     var _this = this;
     if (msbuildExe) {
+        console.log(msbuildExe)
         return function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
