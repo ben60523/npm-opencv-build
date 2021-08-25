@@ -43,29 +43,15 @@ var _a = require('./utils'), exec = _a.exec, execFile = _a.execFile;
 /* this codesnippet is partly taken from the node-gyp source: https://github.com/nodejs/node-gyp */
 function findVs2017() {
     var ps = path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe');
-    var args = ['-ExecutionPolicy', 'Unrestricted', '-Command',
-        '&{Add-Type -Path \'' + path.join(__dirname, '../Find-VS2017.cs') +
-            '\'; [VisualStudioConfiguration.Main]::Query()}'];
-    log.silly('find-msbuild', 'find vs2017 via powershell:', ps, args);
-    return execFile(ps, args, { encoding: 'utf8' })
-        .then(function (stdout) {
-        log.silly('find-msbuild', 'find vs2017: ', stdout);
-        var vsSetup = JSON.parse(stdout);
-        if (!vsSetup || !vsSetup.path || !vsSetup.sdk) {
-            return Promise.reject('unexpected powershell output');
+    var args = ['-ExecutionPolicy', 'Unrestricted', path.join(__dirname, '../', 'CallMSBuild.ps1'), '-version'];
+    return execFile(ps, args, { encoding: 'utf8' }).then((stdout) => {
+        stdout = stdout.split('\n')
+        if (!stdout) return;
+        return {
+            path: true,
+            version: stdout[3].substr(0, 2)
         }
-        log.silly('find-msbuild', 'found vs2017');
-        log.silly('find-msbuild', 'path', vsSetup.path);
-        log.silly('find-msbuild', 'sdk', vsSetup.sdk);
-        var build = {
-            path: path.join(vsSetup.path, 'MSBuild', 'Current', 'Bin', 'MSBuild.exe'),
-            version: 15
-        };
-        log.silly('find-msbuild', 'using following msbuild:');
-        log.silly('find-msbuild', 'version:', build.version);
-        log.silly('find-msbuild', 'path:', build.path);
-        return build;
-    });
+    })
 }
 function parseMsBuilds(stdout) {
     var reVers = /ToolsVersions\\([^\\]+)$/i, rePath = /\r\n[ \t]+MSBuildToolsPath[ \t]+REG_SZ[ \t]+([^\r]+)/i, r;

@@ -29,7 +29,8 @@ exports.cmakeVsCompilers = {
     '11': 'Visual Studio 11 2012',
     '12': 'Visual Studio 12 2013',
     '14': 'Visual Studio 14 2015',
-    '15': 'Visual Studio 15 2017'
+    '15': 'Visual Studio 15 2017',
+    '16': 'Visual Studio 16 2019'
 };
 exports.cmakeArchs = {
     'x64': ' Win64',
