@@ -58,6 +58,9 @@ function getRmDirCmd(dirname) {
 function getMsbuildCmd(sln) {
     console.log(sln)
     return [
+        '-ExecutionPolicy', 
+        'Unrestricted', 
+        path.join(__dirname,'../', 'CallMSBuild.ps1'),
         sln,
         '/p:Configuration=Release',
         "/p:Platform=" + (process.arch === 'x64' ? 'x64' : 'x86')
@@ -68,12 +71,13 @@ function getRunBuildCmd(msbuildExe) {
     if (msbuildExe) {
         console.log(msbuildExe)
         return function () { return __awaiter(_this, void 0, void 0, function () {
+            var ps = path.join(process.env.SystemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe');
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd('./OpenCV.sln'), { cwd: dirs_1.dirs.opencvBuild })];
+                    case 0: return [4 /*yield*/, utils_1.spawn("" + ps, getMsbuildCmd('./OpenCV.sln'), { cwd: dirs_1.dirs.opencvBuild })];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, utils_1.spawn("" + msbuildExe, getMsbuildCmd('./INSTALL.vcxproj'), { cwd: dirs_1.dirs.opencvBuild })];
+                        return [4 /*yield*/, utils_1.spawn("" + ps, getMsbuildCmd('./INSTALL.vcxproj'), { cwd: dirs_1.dirs.opencvBuild })];
                     case 2:
                         _a.sent();
                         return [2 /*return*/];
@@ -130,6 +134,14 @@ function getWinCmakeFlags(msversion) {
     }
     if (!cmakeArch) {
         throw new Error("no cmake arch found for process.arch: " + process.arch);
+    }
+    if (cmakeVsCompiler.includes('2019')) {
+        return [
+            '-G',
+            "" + cmakeVsCompiler, 
+            '-A', 
+            '' + cmakeArch.includes('64') ? 'x64' : 'Win32',
+        ].concat(getSharedCmakeFlags());
     }
     return [
         '-G',
