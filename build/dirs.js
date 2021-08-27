@@ -11,6 +11,7 @@ var opencvBuild = path.join(opencvRoot, 'build');
 var opencvInclude = path.join(opencvBuild, 'include');
 var opencv4Include = path.join(opencvInclude, 'opencv4');
 var opencvLibDir = utils_1.isWin() ? path.join(opencvBuild, 'lib/Release') : path.join(opencvBuild, 'lib');
+var opencv3rdPartyLibDir = utils_1.isWin() ? path.join(opencvBuild, '3rdparty/lib/Release') : path.join(opencvBuild, '3rdparty/lib')
 var opencvBinDir = utils_1.isWin() ? path.join(opencvBuild, 'bin/Release') : path.join(opencvBuild, 'bin');
 var autoBuildFile = path.join(opencvRoot, 'auto-build.json');
 exports.dirs = {
@@ -23,6 +24,7 @@ exports.dirs = {
     opencvInclude: opencvInclude,
     opencv4Include: opencv4Include,
     opencvLibDir: opencvLibDir,
+    opencv3rdPartyLibDir: opencv3rdPartyLibDir,
     opencvBinDir: opencvBinDir,
     autoBuildFile: autoBuildFile
 };

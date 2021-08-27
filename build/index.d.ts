@@ -3,6 +3,7 @@ export { isAutoBuildDisabled, readAutoBuildFile, readEnvsFromPackageJson, applyE
 export { isOSX, isWin, isUnix } from './utils';
 export declare const opencvInclude: string;
 export declare const opencv4Include: string;
+export declare const opencv3rdPartyLibDir: string;
 export declare const opencvLibDir: string;
 export declare const opencvBinDir: string;
 export declare const opencvBuildDir: string;

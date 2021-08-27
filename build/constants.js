@@ -22,7 +22,9 @@ exports.opencvModules = [
     'text',
     'tracking',
     'xfeatures2d',
-    'ximgproc'
+    'ximgproc',
+    'flann',
+    'plot',
 ];
 exports.cmakeVsCompilers = {
     '10': 'Visual Studio 10 2010',
@@ -76,5 +78,8 @@ exports.defaultCmakeFlags = [
     '-DBUILD_opencv_ts=OFF',
     '-DBUILD_opencv_xobjdetect=OFF',
     '-DBUILD_opencv_xphoto=OFF',
-    '-DWITH_VTK=OFF'
+    '-DBUILD_PROTOBUF=OFF',
+    '-DBUILD_opencv_dnn=OFF',
+    '-DWITH_VTK=OFF',
+    '-DBUILD_SHARED_LIBS=OFF'
 ];

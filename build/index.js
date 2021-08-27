@@ -20,6 +20,7 @@ exports.isUnix = utils_2.isUnix;
 exports.opencvInclude = dirs_1.dirs.opencvInclude;
 exports.opencv4Include = dirs_1.dirs.opencv4Include;
 exports.opencvLibDir = dirs_1.dirs.opencvLibDir;
+exports.opencv3rdPartyLibDir = dirs_1.dirs.opencv3rdPartyLibDir;
 exports.opencvBinDir = dirs_1.dirs.opencvBinDir;
 exports.opencvBuildDir = dirs_1.dirs.opencvBuild;
 exports.getLibs = getLibsFactory_1.getLibsFactory({ isWin: utils_1.isWin, isOSX: utils_1.isOSX, opencvModules: constants_1.opencvModules, path: path, fs: fs });
